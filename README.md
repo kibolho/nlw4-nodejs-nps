@@ -24,17 +24,19 @@
 
 <!-- TABLE OF CONTENTS -->
 # Table of Contents
-* [About the Project](#boom-about-the-project)
-  * [Built With](#gear-built-with)
-    * [Tools](#tools)
-    * [Technologies](#Technologies)
-* [Getting Started](#rocket-getting-started)
-  * [Prerequisites](#clipboard-prerequisites)
-  * [Installation](#zap-installation)
-* [License](#memo-license)
-* [Contributing](#bulb-contributing)
-* [Contact](#e-mail-contact)
-* [Acknowledgements](#exclamation-acknowledgements)
+- [Table of Contents](#table-of-contents)
+- [:boom: About The Project](#boom-about-the-project)
+  - [Description](#description)
+- [:gear: Built With](#gear-built-with)
+  - [Tools](#tools)
+  - [Technologies](#technologies)
+- [:rocket: Getting Started](#rocket-getting-started)
+  - [:clipboard: Prerequisites](#clipboard-prerequisites)
+  - [:zap: Installation](#zap-installation)
+- [:bulb: Contributing](#bulb-contributing)
+- [:memo: License](#memo-license)
+- [:e-mail: Contact](#e-mail-contact)
+- [:exclamation: Acknowledgements](#exclamation-acknowledgements)
 <!-- * [Usage](#usage)
 * [Roadmap](#arrows_clockwise-roadmap) -->
 
@@ -91,7 +93,7 @@ Run the commands below to install and run the app.
     yarn
 
     #Start the server
-    yarn dev:server
+    yarn dev
    ```
 
 [:arrow_up: Back to top](#table-of-Contents)
