@@ -10,7 +10,9 @@ import { AppError } from './errors/AppError';
 createConnection();
 const app = express();
 
-app.use(cors({ origin: process.env.URL_HOST }));
+// app.use(cors({ origin: `${process.env.URL_HOST}:${process.env.PORT}` }));
+app.use(cors());
+
 app.use(express.json());
 app.use((request, response, next) => {
   response.setHeader('Content-Type', 'text/html');

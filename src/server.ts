@@ -1,6 +1,4 @@
 import { app } from './app';
 import './docs';
-
-app.listen(process.env.PORT || 3333, () =>
-  console.log('🚀 Server is running on port 3333!'),
-);
+const port = process.env.PORT || process.env.PORT_DEFAULT;
+app.listen(port, () => console.log(`🚀 Server is running on port ${port}!`));

@@ -10,14 +10,11 @@ const customCss: any = fs.readFileSync(
   'utf8',
 );
 const swaggerDocument = JSON.parse(swaggerData);
-swaggerDocument.host = process.env.URL_HOST;
+swaggerDocument.host = `${process.env.URL_HOST}:${process.env.PORT || process.env.PORT_DEFAULT}`;
 /* Swagger files end */
 
-console.log(swaggerFile);
-console.log(swaggerDocument);
+var options = {
+  customCss,
+};
 
-app.use(
-  '/',
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, null, null, customCss),
-);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));

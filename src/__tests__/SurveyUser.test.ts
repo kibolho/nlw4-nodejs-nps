@@ -39,7 +39,6 @@ describe('SurveyUser', () => {
     const email_response = await request(app)
       .post('/sendmail')
       .send({ email: user_email, survey_id });
-    console.log(user_email, survey_id, email_response);
     expect(email_response.status).toBeGreaterThanOrEqual(200);
     expect(email_response.status).toBeLessThanOrEqual(201);
     expect(email_response.body).toHaveProperty('mailUrl');

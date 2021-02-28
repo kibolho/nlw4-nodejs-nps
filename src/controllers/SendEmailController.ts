@@ -33,7 +33,9 @@ class SendEmailController {
       title: survey.title,
       description: survey.description,
       id: '',
-      link: process.env.URL_MAIL,
+      link: `${process.env.URL_HOST}:${
+        process.env.PORT || process.env.PORT_DEFAULT
+      }${process.env.URL_MAIL_ROUTE}`,
     };
 
     const npsEmailPath = resolve(__dirname, '../views/emails/npsMail.hbs');
