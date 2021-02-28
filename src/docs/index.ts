@@ -8,6 +8,7 @@ const swaggerFile: any = (process.cwd()+"/src/docs/swagger.json");
 const swaggerData: any = fs.readFileSync(swaggerFile, 'utf8');
 const customCss: any = fs.readFileSync((process.cwd()+"/src/docs/swagger.css"), 'utf8');
 const swaggerDocument = JSON.parse(swaggerData);
+swaggerDocument.host = process.env.URL_HOST;
 /* Swagger files end */
 
 console.log(swaggerFile);
