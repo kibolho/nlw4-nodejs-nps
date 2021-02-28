@@ -5,19 +5,16 @@ import 'express-async-errors';
 import createConnection from './database';
 import { router } from './router';
 import { AppError } from './errors/AppError';
+import { cors } from 'cors';
 
 createConnection();
 const app = express();
 
+app.use(cors({ origin: process.env.URL_HOST }));
 app.use(express.json());
 app.use((request, response, next) => {
-  response.header('Access-Control-Allow-Origin', '*');
-  response.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept',
-  );
-  response.setHeader('Content-Type', 'text/html')
-  response.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate')
+  response.setHeader('Content-Type', 'text/html');
+  response.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
   next();
 });
 app.use(router);
