@@ -25,12 +25,12 @@
     "ts-node": "^9.1.1",
     "typeorm": "^0.2.31",
     "uuid": "^8.3.2",
-    "yup": "^0.32.9"
+    "yup": "^0.32.9",
+    "@types/node": "^14.14.31"
   },
   "devDependencies": {
     "@types/express": "^4.17.11",
     "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.31",
     "@types/supertest": "^2.0.10",
     "@types/swagger-ui-express": "^4.1.2",
     "@types/uuid": "^8.3.0",
