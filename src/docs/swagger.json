@@ -1,0 +1,360 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NPS Express API with Swagger",
+    "version": "0.1.0",
+    "description": "This is a simple NET PROMOTE SCORE (NPS) API application made with Express and documented with Swagger",
+    "license": {
+      "name": "MIT",
+      "url": "https://spdx.org/licenses/MIT.html"
+    },
+    "contact": {
+      "name": "Abílio Azevedo",
+      "url": "https://abilioazevedo.com.br",
+      "email": "me@abilioazevedo.com.br"
+    }
+  },
+  "schemes": ["http"],
+  "host": "localhost:3333",
+  "basePath": "/",
+  "paths": {
+    "/users": {
+      "post": {
+        "summary": "Create User",
+        "description": "Create user with name and email",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "user object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/surveyUser"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/surveys": {
+      "post": {
+        "summary": "Create Survey",
+        "description": "Create survey with title and description",
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "survey object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/Survey"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/surveyResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all the surveys",
+        "description": "Get all the surveys",
+        "produces": ["application/json"],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/surveyResponse"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/sendmail": {
+      "post": {
+        "summary": "Send Email",
+        "description": "Send email with survey by survey id and email",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Survey User object",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SurveyUser"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/surveyUserResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/answers/{score_value}": {
+      "get": {
+        "summary": "Answer the survey",
+        "description": "Answer the survey by email id",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "score_value",
+            "in": "path",
+            "description": "score of the survey",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "Id of the SurveyUser object",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/answerResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    },
+    "/nps/{survey_id}": {
+      "get": {
+        "summary": "Get the NPS Score of the survey",
+        "description": "Get the NPS Score of the survey by survey id",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "survey_id",
+            "in": "path",
+            "description": "survey id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/npsResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid status value",
+            "schema": {
+              "$ref": "#/definitions/InvalidResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "userResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        }
+      }
+    },
+    "Survey": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "surveyResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        }
+      }
+    },
+    "SurveyUser": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "survey_id": {
+          "type": "string"
+        }
+      }
+    },
+    "surveyUserResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "survey_id": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "mailUrl": {
+          "type": "string"
+        }
+      }
+    },
+    "answerResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "user_id": {
+          "type": "string"
+        },
+        "survey_id": {
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        },
+        "created_at": {
+          "type": "string"
+        }
+      }
+    },
+    "npsResponse": {
+      "type": "object",
+      "properties": {
+        "detractor": {
+          "type": "number"
+        },
+        "promoters": {
+          "type": "number"
+        },
+        "passive": {
+          "type": "number"
+        },
+        "totalAnwers": {
+          "type": "number"
+        },
+        "nps": {
+          "type": "number"
+        }
+      }
+    },
+    "InvalidResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

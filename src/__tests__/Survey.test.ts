@@ -6,8 +6,7 @@ import { getConnection } from 'typeorm';
 describe('Surveys', () => {
   beforeAll(async () => {
     const connection = await createConnection();
-    if (!connection.createQueryRunner().hasTable('surveys'))
-      await connection.runMigrations();
+    await connection.runMigrations();
   });
 
   afterAll(async () => {

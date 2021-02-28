@@ -16,37 +16,37 @@ class SendEmailController {
     const user = await usersRepository.findOne({ email });
 
     if (!user) {
-      throw new AppError("User does not exists!");
+      throw new AppError('User does not exists!');
     }
     const survey = await surveysRepository.findOne({ id: survey_id });
 
     if (!survey) {
-      throw new AppError("Survey does not exists!");
+      throw new AppError('Survey does not exists!');
     }
-
     const surveyUser = await surveysUsersRepository.findOne({
       where: { user_id: user.id, value: null },
       relations: ['user', 'survey'],
     });
 
-    const variables = {
+    let variables = {
       name: user.name,
       title: survey.title,
       description: survey.description,
-      id: surveyUser.id,
+      id: '',
       link: process.env.URL_MAIL,
     };
 
     const npsEmailPath = resolve(__dirname, '../views/emails/npsMail.hbs');
 
     if (surveyUser) {
-      await SendMailServices.execute(
+      variables.id = surveyUser.id;
+      const { mailUrl } = await SendMailServices.execute(
         email,
         survey.title,
         variables,
         npsEmailPath,
       );
-      return response.status(201).json(surveyUser);
+      return response.status(200).json({ ...surveyUser, mailUrl });
     }
 
     const newSurveyUser = surveysUsersRepository.create({
@@ -58,14 +58,13 @@ class SendEmailController {
 
     variables.id = newSurveyUser.id;
 
-    await SendMailServices.execute(
+    const { mailUrl } = await SendMailServices.execute(
       email,
       survey.title,
       variables,
       npsEmailPath,
     );
-
-    return response.status(201).json(newSurveyUser);
+    return response.status(201).json({ ...newSurveyUser, mailUrl });
   }
 }
 

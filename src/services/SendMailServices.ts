@@ -19,7 +19,12 @@ class SendMailService {
       this.client = transporter;
     });
   }
-  async execute(to: string, subject: string, variables: object, templatePath: string) {
+  async execute(
+    to: string,
+    subject: string,
+    variables: object,
+    templatePath: string,
+  ): Promise<{ mailUrl: string }> {
     const templateFileContent = fs.readFileSync(templatePath).toString('utf8');
 
     const mailTemplateParse = handlebars.compile(templateFileContent);
@@ -35,6 +40,7 @@ class SendMailService {
 
     // Preview only available when sending through an Ethereal account
     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(message));
+    return { mailUrl: nodemailer.getTestMessageUrl(message) };
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
   }
 }
