@@ -2,11 +2,13 @@ import { app } from '../app';
 var fs = require('fs');
 var swaggerUi = require('swagger-ui-express');
 
-
-  /* Swagger files start */
-const swaggerFile: any = (process.cwd()+"/src/docs/swagger.json");
+/* Swagger files start */
+const swaggerFile: any = process.cwd() + '/src/docs/swagger.json';
 const swaggerData: any = fs.readFileSync(swaggerFile, 'utf8');
-const customCss: any = fs.readFileSync((process.cwd()+"/src/docs/swagger.css"), 'utf8');
+const customCss: any = fs.readFileSync(
+  process.cwd() + '/src/docs/swagger.css',
+  'utf8',
+);
 const swaggerDocument = JSON.parse(swaggerData);
 swaggerDocument.host = process.env.URL_HOST;
 /* Swagger files end */
@@ -14,4 +16,8 @@ swaggerDocument.host = process.env.URL_HOST;
 console.log(swaggerFile);
 console.log(swaggerDocument);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, null, null, customCss));
+app.use(
+  '/',
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument, null, null, customCss),
+);
