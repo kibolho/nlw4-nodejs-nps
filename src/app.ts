@@ -6,19 +6,21 @@ import 'express-async-errors';
 import createConnection from './database';
 import { router } from './router';
 import { AppError } from './errors/AppError';
+import path from 'path';
 
 createConnection();
 const app = express();
 
 // app.use(cors({ origin: `${process.env.URL_HOST}:${process.env.PORT}` }));
 app.use(cors());
-
 app.use(express.json());
-app.use((request, response, next) => {
-  response.setHeader('Content-Type', 'text/html');
-  response.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-  next();
-});
+// app.use((request, response, next) => {
+//   response.setHeader('Content-Type', 'text/html');
+//   response.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
+//   next();
+// });
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.use(router);
 app.use(
   (err: Error, request: Request, response: Response, _next: NextFunction) => {

@@ -14,7 +14,8 @@ swaggerDocument.host = `${process.env.URL_HOST}:${process.env.PORT || process.en
 /* Swagger files end */
 
 var options = {
+  customSiteTitle: "NPS API",
   customCss,
 };
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options));
