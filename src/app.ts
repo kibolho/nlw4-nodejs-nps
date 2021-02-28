@@ -1,11 +1,11 @@
 import 'reflect-metadata';
 
 import express, { NextFunction, Request, Response } from 'express';
+import cors from 'cors';
 import 'express-async-errors';
 import createConnection from './database';
 import { router } from './router';
 import { AppError } from './errors/AppError';
-import { cors } from 'cors';
 
 createConnection();
 const app = express();
