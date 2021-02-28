@@ -11,7 +11,7 @@
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
     "migration-create": "yarn typeorm migration:create -n CreateUsers",
     "migration-run": "yarn typeorm migration:run",
-    "test": "NODE_ENV=test jest -i",
+    "test": "NODE_ENV=test jest -i --collect-coverage",
     "build": "tsc --project ./"
   },
   "dependencies": {
