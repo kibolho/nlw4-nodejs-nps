@@ -16,6 +16,9 @@
   <a href="https://github.com/kibolho/nlw4-nodejs-nps">
      <img src=".github/Logo.png" alt="Logo">
   </a>
+  <p align="center">
+  <a href="https://insomnia.rest/run/?label=NLW4-NPS&uri=https://raw.githubusercontent.com/kibolho/nlw4-nodejs-nps/master/.github/nlw4-nps-api.json" target="_blank"><img src="https://insomnia.rest/images/run.svg" alt="Run in Insomnia"></a>
+  </p>
 
   [Next Level Week](http://nextlevelweek.com/) it's a seven-day event created by [Rocketseat](https://rocketseat.com.br/), the objective is to take you to the next level of your career. The event has lots of practice coding, challenges, and networking. An online and completely free event that will help you take the next step. :rocket:
 </p>
